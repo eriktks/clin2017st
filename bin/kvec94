@@ -1,0 +1,123 @@
+#!/usr/bin/perl -w
+# kvec94: extract a lexicon from parallel text 
+# usage: kvec94 sourceText targetText [MAXLINES]
+# notes: started from code parallel2lexicon
+#        based on P Fung/K Church 1994: K-vec: A New Approach for Aligning Parallel Texts
+#        optional MAXLINES value indicates how many file-initial lines will be used
+#        the number of pieces K is assumed to be equal to the total number of words in
+#           the sentence pairs that contain the same number of words
+# output: best mutual information score, number of matches found, levenstein score, length of shortest word in pair, source word, translation candidate
+# 20151021 erikt(at)xs4all.nl
+
+use strict;
+use open qw(:std :utf8);
+
+my $command = $0;
+
+my $sourceText = shift(@ARGV); # first file with text: the source text
+my $targetText = shift(@ARGV); # second file with text: the translated text
+my $MAXLINES = shift(@ARGV); # maximum input lines to process; default value is undefined
+if (not defined $targetText) {
+   die "usage: $command sourceText targetText\n";
+}
+if (not open(SFILE,$sourceText)) {
+   die "$command: cannot read from $sourceText\n";
+}
+if (not open(TFILE,$targetText)) {
+   die "$command: cannot read from $targetText\n";
+}
+
+my $nbrOfLines = 0;
+my $wordsUsed = 0; # equal to K in the K-vec algorithm
+my $linesUsed = 0;
+my %lexiconS = (); # word counts source text
+my %lexiconT = (); # word counts translated text
+my %lexiconST = (); # word pair counts
+my %alternatives = (); # hash of hashes with translated words for source words
+LOOP: while (<SFILE>) {
+   my $sLine = $_;
+   chomp($sLine);
+   $nbrOfLines++;
+   if (defined $MAXLINES and $nbrOfLines > $MAXLINES) { last LOOP; }
+   $sLine =~ s/\s*$//;
+   my @sWords = split(/\s+/,$sLine);
+   my $tLine = <TFILE>;
+   chomp($tLine);
+   $tLine =~ s/\s*$//;
+   my @tWords = split(/\s+/,$tLine);
+   # only process sentences with the same number of tokens
+   if ($#sWords == $#tWords) { 
+      for (my $i=0;$i<=$#sWords;$i++) {
+         $lexiconS{$sWords[$i]} = defined $lexiconS{$sWords[$i]} ? $lexiconS{$sWords[$i]}+1 : 1;
+         $lexiconT{$tWords[$i]} = defined $lexiconT{$tWords[$i]} ? $lexiconT{$tWords[$i]}+1 : 1;
+         my $pair = "$sWords[$i] $tWords[$i]";
+         $lexiconST{$pair} = defined $lexiconST{$pair} ? $lexiconST{$pair}+1 : 1;
+         # remember this alternative translation for this source word
+         if (not defined $alternatives{$sWords[$i]}) { $alternatives{$sWords[$i]} = ""; }
+         my %alt = split(/\s+/,$alternatives{$sWords[$i]});
+         $alt{$tWords[$i]} = 1;
+         $alternatives{$sWords[$i]} = join(" ",%alt);
+      }
+      $linesUsed++;
+      $wordsUsed += 1+$#sWords;
+   }
+}
+close(SFILE);
+close(TFILE);
+
+# nbrOfLines = 37235; linesUsed = 11093; wordsUsed = 280152
+
+foreach my $sWord (keys %alternatives) {
+   my %alt = split(/\s+/,$alternatives{$sWord});
+   my $bestT;
+   my $bestScore;
+   my $bestAltScore;
+   foreach my $alt (keys %alt) {
+      # compute mutual information score: K-vec paper, page 3, top left
+      # 20160831 adaption: divide by c rather than by a+c
+      my $MIscore = log($wordsUsed*$lexiconST{"$sWord $alt"}/(($lexiconS{"$sWord"}-$lexiconST{"$sWord $alt"}+0.5)*$lexiconT{"$alt"}))/log(2);
+      if (not defined $bestScore or $bestScore < $MIscore or 
+          # make a choice in case of a tie to make the algorithm deterministic
+          ($bestScore == $MIscore and $lexiconT{"$alt"} > $bestAltScore) or
+          ($bestScore == $MIscore and $lexiconT{"$alt"} == $bestAltScore and $bestT gt $alt)) { 
+         $bestScore = $MIscore; 
+         $bestT = $alt; 
+         $bestAltScore = $lexiconT{"$alt"}; # for dealing with ties
+       }
+   }
+   # output: best mutual information score, number of matches found, levenstein score, length of shortest word in pair, source word, translation candidate
+   if (defined $bestT) { print "$bestScore ".$lexiconST{"$sWord $bestT"}." ".&levenshtein($sWord,$bestT)." ".&minimum(length($sWord),length($bestT))." $sWord $bestT\n"; }
+}
+
+exit(0);
+
+sub minimum() {
+   my $e = shift(@_);
+   if (not defined $e) { die "$command: called minimum() without arguments!\n"; }
+   if ($#_ < 0) { return($e); }
+   else {
+      my $minRest = &minimum(@_);
+      if ($minRest < $e) { return($minRest); }
+      else { return($e); }
+   }
+}
+
+# see https://nl.wikipedia.org/wiki/Levenshteinafstand
+sub levenshtein() {
+   my $s1 = shift(@_);
+   my $s2 = shift(@_);
+   if (not defined $s2) { die "$command: usage: levenshtein(string1,string2)\n"; }
+   my @s1 = split(//,$s1);
+   my @s2 = split(//,$s2);
+   my @d = ();
+   for (my $i=0;$i<=$#s1+1;$i++) { $d[$i][0] = $i; }
+   for (my $j=0;$j<=$#s2+1;$j++) { $d[0][$j] = $j; }
+   for (my $i=0;$i<=$#s1;$i++) {
+      for (my $j=0;$j<=$#s2;$j++) {
+         my $cost = 0;
+         if ($s1[$i] ne $s2[$j]) { $cost = 1; }
+         $d[$i+1][$j+1] = &minimum($d[$i][$j+1]+1,$d[$i+1][$j]+1,$d[$i][$j]+$cost);
+      }
+   }
+   return($d[$#s1+1][$#s2+1]);
+}

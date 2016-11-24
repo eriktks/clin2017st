@@ -1,0 +1,44 @@
+20161031 test file CLIN2017 shared task: 17th century - 21st century Dutch
+
+This directory contain a sample file of a translation of
+17th century Dutch to 21st century Dutch. It consists of
+about a thousand words of "Den Neder-landschen herbarius
+ofte kruid-boek der voornaamste kruiden" by Steven Blankaart
+from 1698, source: http://dbnl.nl/tekst/blan012nede01_01/
+
+There are two versions of the text: the original version
+from 1698 (blankaart.tok) and a translated version 
+(blankaartT.tok). Both versions have already been tokenized.
+The translated version contains two non-text features:
+
+word_word: attached words with an underscore (_) indicate
+           words from the original text which have been
+           split in the translation, e.g. "van_de" which
+           originally was "des".
+
+word+word: attached words with a plus sign (+) indicate
+           words from the orginal text which have been
+           combined in the translation, e.g. "zo+als" which
+           originally was "soo als".
+
+The split and combined word markers were introduced in the
+translated text to make it possible to have exactly the same
+number of tokens in the translation as in the original text.
+You may choose alternative methods but note that it is
+desirable to be able to link the translated tokens back to
+the original tokens for future processing (for example
+part-of-speech tagging).
+
+Ideally your translation system would produce output which
+includes the two non-text characters. However, you may
+choose to ignore them and replace the underscores by spaces
+and do the same to the plus signs or remove them (thus
+linking the linked word parts). If you do this, please note
+this when you submit your results so that we can evaluate
+the output of your system in the proper way.
+
+The test files submitted in January 2017, will be in the
+same format as blankaart.tok: a tokenized 17th century text.
+The gold standard translated text will be released after
+everyone has submitted their translations.
+

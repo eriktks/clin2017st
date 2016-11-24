@@ -1,0 +1,81 @@
+#!/usr/bin/perl -w
+# herziene2txt: extract text from Herziene Statenvertaling: http://herzienestatenvertaling.nl/
+# usage: herziene2txt < file
+# 20160826 erikt(at)xs4all.nl
+
+use strict;
+
+my $command = $0;
+my $lineCounter = 1;
+my $baseUrl = "http://herzienestatenvertaling.nl/tekst.php?boek=";
+# short names of books; do not use hash: is unordered
+my @books =    qw(GEN EXO LEV NUM DEU JOS JDG RUT
+                  1SA 2SA 1KI 2KI 1CH 2CH EZR NEH
+                  EST JOB PSA PRO ECC SNG ISA JER
+                  LAM EZK DAN HOS JOL AMO OBA JON
+                  MIC NAM HAB ZEP HAG ZEC MAL
+                  MAT MRK LUK JHN ACT ROM 1CO 2CO
+                  GAL EPH PHP COL 1TH 2TH 1TI 2TI
+                  TIT PHM HEB JAS 1PE 2PE 1JN 2JN
+                  3JN JUD REV);
+# number of chapters per book
+my %chapters = qw(GEN 50 EXO 40 LEV  27 NUM 36 DEU 34 JOS 24 JDG 21 RUT  4
+                  1SA 31 2SA 24 1KI  22 2KI 25 1CH 29 2CH 36 EZR 10 NEH 13
+                  EST 10 JOB 42 PSA 150 PRO 31 ECC 12 SNG  8 ISA 66 JER 52
+                  LAM  5 EZK 48 DAN  12 HOS 14 JOL  3 AMO  9 OBA  1 JON  4
+                  MIC  7 NAM  3 HAB   3 ZEP  3 HAG  2 ZEC 14 MAL  4
+                  MAT 28 MRK 16 LUK  24 JHN 21 ACT 28 ROM 16 1CO 16 2CO 13
+                  GAL  6 EPH  6 PHP   4 COL  4 1TH  5 2TH  3 1TI  6 2TI  4
+                  TIT  3 PHM  1 HEB  13 JAS  5 1PE  5 2PE  3 1JN  5 2JN  1
+                  3JN  1 JUD  1 REV  22);
+# missing lines in this text version; we will insert a black line
+my %missingLines = qw(14093 1 14726 1 14747 1 14765 1 14854 1 19225 1 22108 1 26913 1 27698 1);
+my $downloads = 0;
+
+if (not -d "html") { mkdir("html"); }
+for (my $b=0;$b<=$#books;$b++) {
+   if (not defined $chapters{$books[$b]}) { die "$command: book without chapters: $books[$b]\n"; }
+   for (my $c=1;$c<=$chapters{$books[$b]};$c++) {
+      my $htmlFile = "html/$books[$b]-$c.html";
+      if (-f $htmlFile) { open(INFILE,$htmlFile); }
+      else {
+         sleep(1);
+         print STDERR "."; 
+         $downloads++;
+         open(INFILE,"curl -s -o - '$baseUrl$books[$b]\&hoofdstuk=$c' | tee $htmlFile |") or
+            die "$command: cannot run curl to fetch data files!\n";
+      }
+      my $outLine = "";
+      while (<INFILE>) {
+         my $line = $_;
+         chomp($line);
+         if ($line =~ /javascript:getParallel/ and $outLine ne "") {
+            print "$outLine\n";
+            $outLine = "";
+            $lineCounter++;
+         }
+         if ($line =~ /<span class="main"/i) {
+            # remove html tags from line
+            $line =~ s/^.*<span class="main">//i;
+            $line =~ s/<\/span>.*//i;
+            $line =~ s/<[^<>]*>//g;
+            $line =~ s/.nbsp.//gi;
+            # change utf characters to ascii
+            $line =~ s/–/-/g;
+            $line =~ s/‘/'/g;
+            $line =~ s/’/'/g;
+            $line =~ s/“/"/g;
+            $line =~ s/”/"/g;
+            $outLine = ($outLine eq "") ? $line : "$outLine $line";
+         }
+         while (defined $missingLines{$lineCounter}) {
+            print "\n";
+            $lineCounter++;
+         }
+      }
+      if ($outLine ne "") { print "$outLine\n"; $lineCounter++; }
+      close(INFILE);
+   }
+}
+if ($downloads > 0) { print STDERR "\n"; }
+exit(0);

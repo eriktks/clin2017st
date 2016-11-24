@@ -1,0 +1,131 @@
+#!/usr/bin/perl -w
+# dbnl2txt: extract text from Statenvertaling file from DBNL: _sta001stat01_01
+# usage: dbnl2txt [text-id] > file
+# 20160817 erikt(at)xs4all.nl
+
+use strict;
+
+my $command = $0;
+my $start = 7;
+my $end = 1450;
+# for debugging: process only the text with this number (9-1441)
+if (defined $ARGV[0]) { $start = $end = shift(@ARGV); }
+my $lineCounter = 1;
+my $baseUrl = "http://dbnl.nl/tekst/_sta001stat02_01/_sta001stat02_01_";
+# %skip: sections without bible text
+# but is skipping files really necessary?
+my %skip = qw(57 1 58 1 99 1 127 1 164 1 165 1 200 1 225 1 247 1 252 1
+              284 1 309 1 332 1 358 1 388 1 425 1 436 1 450 1 461 1 504 1
+              656 1 688 1 701 1 710 1 777 1 830 1 836 1 885 1 898 1 913 1
+              917 1 927 1 929 1 934 1 942 1 946 1 950 1 954 1 957 1 972 1
+              977 1 1006 1 1023 1 1048 1 1070 1 1099 1 1116 1 1133 1 1147 1
+              1154 1 1161 1 1166 1 1171 1 1177 1 1181 1 1188 1 1193 1 1197 1
+              1199 1 1213 1 1219 1 1225 1 1229 1 1235 1 1237 1 1239 1 1241 1
+              1264 1 1265 1 1340 1 1341 1 1406 1 1411 1 
+             );
+# missing lines in this text version; we will insert a blank line
+my %missingLines = qw();
+my $downloads = 0;
+
+if (not -d "html") { mkdir("html"); }
+LOOP: for (my $id=$start;$id<=$end;$id++) {
+   if (defined $skip{$id}) { next LOOP; }
+   while ($id !~ /..../) { $id = "0$id"; }
+   my $chaptersSeen = 0; # flag signaling chapter number seen
+   my $notesSeen = 0; # flag signaling notes section seen
+   my $openLine = 0; # flag for signaling output line without newline
+   my $htmlFile = "html/$id.html";
+   my $lastLine = "";
+   my $inText = 0;
+   if (-f $htmlFile) { open(INFILE,$htmlFile); }
+   else {
+      sleep(1); # wait one second to avoid overloading website
+      print STDERR ".";
+      $downloads++;
+      open(INFILE,"curl -s -o - $baseUrl$id.php | tee $htmlFile |") or
+         die "$command: cannot run curl to fetch data files!\n";
+   }
+   $id =~ s/^0+//;
+   while (<INFILE>) {
+      my $line = $_;
+      chomp($line);
+      # correct frequent html error in Old Testament text
+      if ($id <= 974) {
+         $line =~ s/<p class="indent">(\d+)\s/<h4>$1<\/h4><p>/;
+      }
+      if ($line =~ /<h4>\d+<\/h4>/) { $chaptersSeen = 1; }
+      if ($line =~ /class="noten-kolom"/) { $notesSeen = 1; }
+      if ($line =~ /<h4>/) { $inText = 1; }
+      if ($line =~ /<p class="indent">\s*\D/) { $inText = 0; }
+      if ($chaptersSeen and not $notesSeen and $inText) {
+         # content line detected: split in html tags and text
+         my @baseTokens = split(/([<>])/,$line);
+         my @tokens = ();
+         for (my $i=0;$i<=$#baseTokens;$i++) {
+            if ($#tokens >= 0 and 
+                $tokens[$#tokens] =~ /^</ and
+                $tokens[$#tokens] !~ />$/) { 
+               $tokens[$#tokens] .= $baseTokens[$i]; 
+            } elsif ($baseTokens[$i] !~ /^\s*$/) { 
+               push(@tokens,$baseTokens[$i]); 
+            }
+         }
+         # print text between tags, except for verse numbers and footnote numbers
+         my $outLine = "";
+         my $lastTag = "";
+         for (my $i=0;$i<=$#tokens;$i++) { 
+            if ($tokens[$i] !~ /^<.*>$/ and 
+                ($i == 0 or ($i > 0 and $tokens[$i-1] !~ /^<(div|h4|span|p class)/i))) { 
+               $outLine .= $tokens[$i];
+            }
+            if ($tokens[$i] =~ /^<.*>$/) { $lastTag = $tokens[$i]; }
+         }
+         if ($line =~ /<h4/ and $openLine) { 
+            print "\n"; 
+            $openLine = 0; 
+            $lineCounter++;
+         }
+         # test if the line is complete
+         if ($outLine !~ /^\s*FINIS\s*$/ and $line !~ /<p class/) { 
+            # split combined lines
+            # html error in file _sta001stat02_01_0195.php
+            if ($lineCounter == 5716 and $outLine) { $outLine =~ s/$/\n/; $lineCounter++; }
+            if ($lineCounter == 14092 and $outLine) { $outLine =~ s/ick sal/\nick sal/; $lineCounter++; }
+            if ($lineCounter == 16032 and $outLine) { $outLine =~ s/\s*TETH.\s*/---SKIP---/; }
+            # error in _sta001stat02_01_1071.php
+            if ($lineCounter == 27017 and $outLine) { 
+               $outLine =~ s/^Verklaringe over.*$/---SKIP---/; 
+               $outLine =~ s/^ALsoo bij ons.*/---SKIP---/; 
+               $outLine =~ s/^Petrus bestraft.*/---SKIP---/; 
+               $outLine =~ s/^Paulus naer.*/---SKIP---/; 
+            }
+            if ($lineCounter == 27697 and $outLine) { $outLine =~ s/\s*(Ende dit geseght)/\n$1/; $lineCounter++; }
+            if ($lineCounter == 35411 and $outLine) { $outLine =~ s/^\s*Het tweede Aenhanghsel.*/---SKIP---/; }
+            # there are two special characters not encoded as SGML entities
+            $outLine =~ s/·/\&middot;/g;
+            $outLine =~ s/ё/\&euml;/g;
+            if ($lastTag !~ /^<div/ and $line =~ /<\/p>/) { 
+               if ($outLine !~ /---SKIP---/) {
+                  print "$outLine\n"; 
+                  $lineCounter++;
+               }
+               $openLine = 0;
+            } else { 
+               if ($outLine !~ /---SKIP---/) {
+                  $outLine =~ s/-\s*$//;
+                  print $outLine; 
+                  if ($outLine) { $openLine = 1; }
+               }
+            } 
+         }
+      }
+      if ($line !~ /^\s*$/) { $lastLine = $line; }
+      while (defined $missingLines{$lineCounter}) {
+         print "\n";
+         $lineCounter++;
+      }
+   }
+}
+if ($downloads > 0) { print STDERR "\n"; }
+
+exit(0);

@@ -1,0 +1,58 @@
+#!/usr/bin/perl -w
+# tokenize: basic tokenizer
+# usage: tokenize < file
+# 20150703 erikt(at)xs4all.nl
+
+use strict;
+use utf8;
+binmode(STDIN, ":utf8");
+binmode(STDOUT, ":utf8");
+my $command = $0;
+
+# read lines from standard input and process them
+while (<STDIN>) {
+   my $line = $_;
+   chomp($line);
+   $line = &convertEntities($line); # alternative for Linux's recode
+   # split line in tokens based on white space
+   my @tokens = split(/\s+/,$line);
+   for (my $i=0;$i<=$#tokens;$i++) {
+      # separate intial nonalphabetic characters from current token
+      while ($tokens[$i] =~ /^(\W)/i and $tokens[$i] !~ /^('t|’t|‘t|`t)$/i) {
+         print "$1 ";
+         $tokens[$i] =~ s/^.//;
+      }
+      # separate final nonalphabetic characters from current token
+      my @rest = ();
+      while ($tokens[$i] =~ /(\W)$/i) {
+         unshift(@rest,$1);
+         $tokens[$i] =~ s/.$//;
+      }
+      # print current token if nonempty
+      if ($tokens[$i] ne "") { print $tokens[$i]." "; }
+      # print final nonalphabetic tokens, if present
+      for (my $j=0;$j<=$#rest;$j++) { print $rest[$j]." "; }
+   }
+   print "\n";
+}
+exit(0);
+
+sub convertEntities() {
+   my $line = shift(@_);
+   $line =~ s/&auml;/ä/g;
+   $line =~ s/&euml;/ë/g;
+   $line =~ s/&iacute;/í/g;
+   $line =~ s/&iuml;/ï/g;
+   $line =~ s/&lsquo;/‘/g;
+   $line =~ s/&middot;/·/g;
+   $line =~ s/&nbsp;/ /g;
+   $line =~ s/&ndash;/–/g;
+   $line =~ s/&not;/¬/g;
+   $line =~ s/&ocirc;/ô/g;
+   $line =~ s/&ouml;/ö/g;
+   $line =~ s/&rsquo;/’/g;
+   $line =~ s/&uuml;/ü/g;
+   $line =~ s/&lt;/</g;
+   $line =~ s/&gt;/>/g;
+   return($line);
+}

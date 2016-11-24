@@ -1,0 +1,41 @@
+#!/usr/bin/perl -w
+# tokenize: basic tokenizer
+# usage: tokenize < file
+# 20150703 erikt(at)xs4all.nl
+
+use strict;
+use utf8;
+binmode(STDIN, ":utf8");
+binmode(STDOUT, ":utf8");
+my $command = $0;
+# send output to recode to convert SGML entities, for example: &lt; becomes <
+open(INFILE,"recode html..utf8 |") or die "$command: cannot start recode\n";
+binmode(INFILE, ":utf8");
+
+# read lines from standard input and process them
+while (<INFILE>) {
+   my $line = $_;
+   chomp($line);
+   # split line in tokens based on white space
+   my @tokens = split(/\s+/,$line);
+   for (my $i=0;$i<=$#tokens;$i++) {
+      # separate intial nonalphabetic characters from current token
+      while ($tokens[$i] =~ /^(\W)/i) {
+         print "$1 ";
+         $tokens[$i] =~ s/^.//;
+      }
+      # separate final nonalphabetic characters from current token
+      my @rest = ();
+      while ($tokens[$i] =~ /(\W)$/i) {
+         unshift(@rest,$1);
+         $tokens[$i] =~ s/.$//;
+      }
+      # print current token if nonempty
+      if ($tokens[$i] ne "") { print $tokens[$i]." "; }
+      # print final nonalphabetic tokens, if present
+      for (my $j=0;$j<=$#rest;$j++) { print $rest[$j]." "; }
+   }
+   print "\n";
+}
+close(INFILE);
+exit(0);

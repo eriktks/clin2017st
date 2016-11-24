@@ -1,0 +1,43 @@
+#!/usr/bin/perl -w
+# translate: perform word by word translation on text
+# usage: translate lexicon < text
+# 20150717 erikt(at)xs4all.nl
+
+use strict;
+
+my $command = $0;
+my $lexicon = shift(@ARGV);
+if (not defined $lexicon) { die "usage: $command lexicon < text\n"; }
+if (not open(INFILE,$lexicon)) { 
+   die "$command: cannot read lexicon file $lexicon\n";
+}
+# expected line format: score #translations word score1 translation1 ...
+my %lexicon = ();
+my $tokensLeft;
+while (<INFILE>) {
+   my $line = $_;
+   chomp($line);
+   my @tokens = split(/\s+/,$line);
+   my $translation = pop(@tokens);
+   my $word = pop(@tokens);
+   if (not defined $tokensLeft) { $tokensLeft = $#tokens+1; }
+   if (not defined $word) { die "$command: incomplete lexicon line: $line\n"; }
+   if ($tokensLeft != $#tokens+1) { die "$command: unexpected lexicon line: $line\n"; }
+   if (defined $lexicon{$word}) { die "$command: double translation for word $word!\n"; }
+   $lexicon{$word} = $translation;
+}
+close(INFILE);
+
+# process text
+while (<STDIN>) {
+   my $line = $_;
+   chomp($line);
+   my @tokens = split(/\s+/,$line);
+   foreach my $token (@tokens) {
+      if (defined $lexicon{$token} and $lexicon{$token} ne $token) { print $lexicon{$token}." "; }
+      else { print "$token "; }
+   }
+   print "\n";
+}
+ 
+exit(0);

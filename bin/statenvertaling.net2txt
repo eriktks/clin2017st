@@ -1,0 +1,88 @@
+#!/usr/bin/perl -w
+# statenvertaling.net2txt: extract text from statenvertaling.net files
+# usage: statenvertaling.net2txt > file
+# 20160817 erikt(at)xs4all.nl
+
+use strict;
+
+my $command = $0;
+my $baseUrl = "http://www.statenvertaling.net/bijbel/";
+# short names of books; do not use hash: it is unordered
+my @books = qw(gene exod levi nume deut jozu rich
+               ruth 1sam 2sam 1kon 2kon 1kro 2kro
+               ezra nehe esth job  psal spre pred
+               hoog jesa jere klaa ezec dani hose
+               joel amos obad jona mich nahu haba
+               sefa hagg zach male
+               matt marc luka joha hand rome 1kor
+               2kor gala efez fili kolo 1tes 2tes
+               1tim 2tim titu file hebr jako 1pet
+               2pet 1joh 2joh 3joh juda open
+               3ezr 4ezr tobi judi wijs jezu baru
+               esta azar geza susa bele mana 1mak
+               2mak 3mak);
+# number of chapters per book
+my @chapters = qw(50 40 27 36  34 24 21
+                   4 31 24 22  25 29 36
+                  10 13 10 42 150 31 12
+                   8 66 52  5  48 12 14
+                   3  9  1  4   7  3  3
+                   3  2 14  4
+                  28 16 24 21  28 16 16
+                  13  6  6  4   4  5  3
+                   6  4  3  1  13  5  5
+                   3  5  1  1   1 22
+                   9 16 14 16  19 51  6
+                  16  1  1  1   1  1 16 
+                  15  7);
+my $downloads = 0;
+
+# get the text of each chapter from each books
+if (not -d "html") { mkdir("html"); }
+for (my $b=0;$b<=$#books;$b++) {
+   LOOP: for (my $c=1;$c<=$chapters[$b];$c++) {
+      # apocryph book esra starts at chapter 10
+      if ($books[$b] eq "esta" and $c < 10) { next LOOP; }
+      my $textSeen = 0; # flag signaling text marker seen
+      my $htmlFile = "html/".$books[$b]."-".$c.".html";
+      if (-f $htmlFile) { open(INFILE,$htmlFile); }
+      else {
+         sleep(1); # wait one second to avoid overloading web site
+         print STDERR ".";
+         $downloads++;
+         open(INFILE,"curl -s -o - $baseUrl/$books[$b]/$c.html | tee $htmlFile |") or
+            die "$command: cannot run curl to fetch data files!\n";
+      }
+      while (<INFILE>) {
+         my $line = $_;
+         chomp($line);
+         if ($line =~ /id="tekst"/) { $textSeen = 1; }
+         if ($textSeen and $line =~ /<p id="v[0-9]/) {
+            # content line detected: split in html tags and text
+            my @baseTokens = split(/([<>])/,$line);
+            my @tokens = ();
+            for (my $i=0;$i<=$#baseTokens;$i++) {
+               if ($#tokens >= 0 and 
+                   $tokens[$#tokens] =~ /^</ and
+                   $tokens[$#tokens] !~ />$/) { 
+                  $tokens[$#tokens] .= $baseTokens[$i]; 
+               } elsif ($baseTokens[$i] !~ /^\s*$/) { 
+                  push(@tokens,$baseTokens[$i]); 
+               }
+            }
+            # print text between tags, except for verse numbers and footnote numbers
+            my $printed = 0;
+            for (my $i=0;$i<=$#tokens;$i++) { 
+               if ($tokens[$i] !~ /^<.*>$/ and
+                   ($i > 0 and $tokens[$i-1] !~ /^<(a)/i)) { 
+                  print $tokens[$i];
+                  $printed = 1;
+               }
+            }
+            if ($printed) { print "\n"; }
+         }
+      }
+   }
+}
+if ($downloads > 0) { print STDERR "\n"; }
+exit(0);

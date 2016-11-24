@@ -1,0 +1,102 @@
+#!/usr/bin/perl -w
+# bleu: compare two texts with bleu score
+# usage: bleu translatedFile referenceFile
+# note: beware of file order in arguments: different order => different results!
+# compared with: multi-bleu.perl
+# https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl
+# 20150903 erikt(at)xs4all.nl
+# 20160919 current version
+
+use strict;
+
+my $command = $0;
+my $MAXNGRAM = 4;
+
+my $translated = shift(@ARGV);
+my $reference = shift(@ARGV);
+if (not defined $reference) { 
+   die "usage: $command translatedFile referenceFile\n"; 
+}
+if ($translated eq "-") { open(TRANSLATED,"<&STDIN"); }
+elsif (not open(TRANSLATED,$translated)) {
+   die "$command: cannot read file $translated\n";
+}
+if ($reference eq "-") { open(REFERENCE,"<&STDIN"); }
+elsif (not open(REFERENCE,$reference)) {
+   die "$command: cannot read file $reference\n";
+}
+my $s = 0; # number of lines/sentences (should be the same in both files)
+my $bleuScore = 0; # bleu score
+my $tLength = 0;   # number of tokens in the translated text
+my $rLength = 0;   # number of tokens in the reference text
+my @pScores = ();  # number of indentical ngrams on both lines (case sensitive)
+my @pTotals = ();  # number of ngrams in the translated text
+while (<TRANSLATED>) {
+   my $tLine = $_; # translated line
+   chomp($tLine);
+   $tLength += split(/\s+/,$tLine);
+   my $rLine = <REFERENCE>; # reference line
+   if (not defined $rLine) { 
+      die "$command: too few lines in reference file!\n";
+   }
+   chomp($rLine);
+   $rLength += split(/\s+/,$rLine);
+   for (my $n=1;$n<=$MAXNGRAM;$n++) {
+      my %tNgrams = &getNgrams($n,$tLine);
+      my %rNgrams = &getNgrams($n,$rLine);
+      my ($score,$total) = &compareNgrams(\%tNgrams,\%rNgrams);
+      $pScores[$n] = defined $pScores[$n] ? $pScores[$n]+$score : $score;
+      $pTotals[$n] = defined $pTotals[$n] ? $pTotals[$n]+$total : $total;
+   }
+   $s++;
+}
+close(REFERENCE);
+close(TRANSLATED);
+# compute n-gram precisions: number of matches divided by total
+for (my $n=1;$n<=$MAXNGRAM;$n++) { 
+   $pScores[$n] /= $pTotals[$n] > 0 ? $pTotals[$n] : 1;
+   # bleu score is (exponent of) geometric average of ngram precision scores
+   $bleuScore += log($pScores[$n])/$MAXNGRAM; 
+}
+$bleuScore = exp($bleuScore);
+# multiply with brevity penalty if the translated text is shorter
+my $BP = ($tLength < $rLength) ? exp(1-$rLength/$tLength) : 1.0; 
+$bleuScore *= $BP;
+printf "processed %d sentences; bleu score = %0.5f\n",$s,$bleuScore;
+
+exit(0);
+
+sub getNgrams() {
+   my $n = shift(@_);
+   my $line = shift(@_);
+   if (not defined $line) { 
+      die "$command: function getNgrams requires an argument\n"; 
+   }
+   my @t = split(/\s+/,$line);
+   my %ngrams = ();
+   for (my $i=0;$i<=$#t-$n+1;$i++) {
+      my $ngram = $t[$i];
+      for (my $j=1;$j<$n;$j++) { $ngram .= " ".$t[$i+$j]; }
+      $ngrams{$ngram} = defined $ngrams{$ngram} ? $ngrams{$ngram}+1 : 1;
+   }
+   return(%ngrams);
+}
+
+sub compareNgrams() {
+   my ($tNgramsRef,$rNgramsRef) = @_;
+   if (not defined $rNgramsRef) { 
+      die "$command: function compareNgrams requires two arguments\n"; 
+   }
+   my %tNgrams = %{$tNgramsRef};
+   my %rNgrams = %{$rNgramsRef};
+   my $tLength = 0;
+   my $score = 0;
+   foreach my $key (keys %tNgrams) { $tLength += $tNgrams{$key}; }
+   foreach my $key (keys %tNgrams) {
+      if (defined $rNgrams{$key}) {
+         if ($tNgrams{$key} < $rNgrams{$key}) { $score += $tNgrams{$key}; } 
+         else { $score += $rNgrams{$key}; }
+      }
+   }
+   return($score,$tLength);
+}

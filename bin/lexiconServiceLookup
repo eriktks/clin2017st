@@ -1,0 +1,35 @@
+#!/usr/bin/perl -w
+# lexiconServiceLookup: lookup word(s) on the INL Lexicon Service (find lemma)
+# usage: lexiconServiceLookup < file
+# note: input file contains one word per line
+# 20160831 erikt(at)xs4all.nl
+
+use strict;
+
+my $command = $0;
+my $url = "http://sk.taalbanknederlands.inl.nl/LexiconService/lexicon/get_lemma?database=lexicon_service_db\&case_sensitive=false\&wordform=";
+
+# read and process words
+while (<STDIN>) {
+   my $line = $_;
+   chomp($line);
+   sleep(1);
+   if (not open(INFILE,"curl -s -o - '$url'$line |")) {
+      die "$command: cannot access lexicon service with curl!\n";
+   } else {
+      print $line;
+      while (<INFILE>) { 
+         my $line = $_;
+         chomp($line);
+         my @tokens = split(/([<>])/,$line);
+         for (my $i=2;$i<=$#tokens;$i++) {
+            if ($tokens[$i-2] eq "lemma" and $tokens[$i-1] eq ">") {
+               print " ".$tokens[$i];
+            }
+         }
+         print "\n";
+      }
+      close(INFILE);
+   }
+}
+exit(0);

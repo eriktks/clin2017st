@@ -1,0 +1,29 @@
+#!/usr/bin/perl -w
+# wc: count the number of words per line
+# usage: wc [-t] < file
+# note: option -t invokes token output: one per line; counts are skipped
+# 20161028 erikt(at)xs4all.nl
+
+use strict;
+
+my $nbrOfEmpty = 0;
+while (<STDIN>) {
+   my $line = $_;
+   chomp($line);
+   $line =~ s/^\s+//;
+   $line =~ s/\s+$//;
+   my @tokens = split(/[+\s]+/,$line);
+   my $nbrOfTokens = $#tokens+1;
+   if (not @ARGV) {
+      if ($nbrOfTokens > 0) { print "$nbrOfTokens\n"; }
+      else { $nbrOfEmpty++; }
+   } else { # token output requested
+     for (my $i=0;$i<=$#tokens;$i++) { print $tokens[$i]."\n"; }
+   }
+}
+if (not @ARGV) {
+   print "found $nbrOfEmpty empty line";
+   if ($nbrOfEmpty != 1) { print "s"; }
+   print "\n"; 
+}
+exit(0);

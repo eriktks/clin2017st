@@ -1,0 +1,24 @@
+#!/usr/bin/perl -w
+# chooseLexiconWords: select lexicon word pairs from the output of kvec94
+# usage: chooseLexiconWords < file
+# note: expected input line format: 5.9934995772572 7 1 2 ist is
+#       best mutual information score, number of matches found, levenstein score, length of shortest word in pair, source word, translation candidate
+# 20160825 erikt(at)xs4all.nl
+
+use strict;
+
+my $command = $0;
+my $MINMI =  0.0; # minimum mutual information value 
+my $MINFREQUENCY = 2; # minimum frequency value
+
+while (<STDIN>) {
+   my $line = $_;
+   chomp($line);
+   my ($mi,$frequency,$levenshtein,$length,$sWord,$tWord) = split(/\s+/,$line);
+   if (defined $sWord and defined $tWord and $sWord ne "" and $tWord ne "" and
+       ($frequency >= $MINFREQUENCY or 
+        ($mi >= $MINMI and $levenshtein < $length))) {
+      print "$sWord $tWord\n";
+   }
+}
+exit(0);
