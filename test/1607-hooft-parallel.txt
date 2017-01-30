@@ -1,0 +1,1410 @@
++ LID De
++ ADJ gewonde
++ SPEC Venus
++ LET .
+
+- N Tafelspel
++ LET .
+
+- SPEC JUPPIJN
++ LET .
+
++ BW Wanneer
++ VNW mijn
+- N ooghen
++ LET ,
++ ADJ daer
++ VNW 't
++ BW al
++ N glas
++ VZ voor
++ WW is
++ LET ,
++ WW bespieden
+
+- VNW 'T
+- WW geschiedendt
++ LET ,
++ VG en
++ VNW 't
+- ADJ geschiede'
++ LET ,
++ VG en
++ VNW wat
++ VG noch
++ ADJ sal
++ WW geschieden
++ LET ,
+
++ VG En
++ VNW dat
+- N Natuir
++ BW niet
++ WW is
++ VZ als
++ N beurt
++ VZ van
+- N quaên
++ VG en
+- N goên
++ LET :
+
++ SPEC Prometheus
++ LET ,
+- N denck
+- N jck
++ BW dan
++ LET ,
+- WW maeckten
++ VNW ons
++ VNW wat
++ VZ te
++ WW doen
++ LET ,
+
++ VG Als
++ VNW hij
++ VZ van
+- WW potaerdt
++ VNW 't
++ BW eerst
++ LID der
++ N dieren
++ WW heeft
++ WW geschapen
++ LET ,
+
++ VNW Die
++ VZ binnen
++ N varkens
++ LET ,
++ VG en
++ VZ buiten
+- WW gelijcken
+- N aepen
++ LET .
+
+- SPEC Hobbollich
++ LET ,
+- N ongelijck
+- WW t'een
+- N t'aer
++ LET ,
++ BW nu
++ BW dus
++ LET ,
+- N soo
++ BW dan
++ LET ,
+
++ SPEC Soo
+- ADJ grillich
++ LET ,
+- ADJ datse
+- N nau
++ LID een
+- N Godt
++ WW begrijpen
++ SPEC can
++ LET ,
+
+- SPEC Sijn
++ WW 's
++ N menschen
++ WW werken
++ VNW meest
++ LET ;
+- N t'hans
++ WW vliedt
++ VNW hij
++ VG dat
++ VNW hij
+- N jaechden
++ LET ,
+
++ VG En
++ BW heden
++ VNW hem
++ N verdriet
++ LET ,
++ VNW dat
++ BW gister
++ VNW hem
+- WW behaechden
++ LET ,
+
++ VNW Hij
++ WW weet
++ BW niet
++ VNW wat
++ VNW hij
++ WW wil
++ LET ;
+- N sijn
+- N sinnen
++ N sonder
++ N vree
+
+- WW Dwerrelen
++ VZ met
++ LID de
++ WW wint
++ VZ in
+- ADJ havenloose
++ N zee
++ LET ;
+
++ VG En
+- N leeren
++ VZ door
+- WW beraedt
++ BW niet
+- WW wijcken
+- N d'een
++ VZ voor
+- N d'ander
++ LET ,
+
+- N Maer
+- N quetsen
++ ADJ blindelings
+- N haer
+- WW stootende
+- N malcander
++ LET .
+
+- N MERCUR
++ LET .
+
+- N Haer
++ WW lust
++ BW nu
++ VNW dit
++ LET ,
++ BW nu
++ VNW dat
++ LET ,
++ VG en
++ BW al
+- N omhelsen
+- ADJ sij
++ VNW 't
++ LET ,
+
+- N Maer
++ VG als
++ VNW 't
++ VZ op
++ LID 't
++ WW knijpen
+- WW comt
+- SPEC soo
+- N sijn
+- N sijs
++ VNW alles
+- WW quijt
++ LET .
+
+- SPEC JUPPIJN
++ LET .
+
++ SPEC Soo
+- ADJ sij
++ VZ in
++ ADJ juiste
+- N schael
+- N haer
++ WW werken
+- WW overwoegen
+
+- ADJ Dewijl
+- ADJ sijse
+- N 'in
+- N haer
++ N hart
++ LET ,
++ VG noch
++ ADJ ongeboren
++ LET ,
++ WW droegen
++ LET ,
+
++ VG En
++ N sagen
+- N deuchts
+- WW genoecht
++ LET ,
+- N sij
+- WW souden
+- ADJ haer
+- WW beraên
+
++ BW Wel
++ LID een
++ ADJ verscheiden
+- WW tredt
++ LET ,
+- N maer
+- N eenen
+- ADJ wech
++ VZ te
+- WW gaen
++ LET ,
+
++ VG En
+- N mickend'
++ VZ op
++ LID de
+- N deucht
++ LET ,
++ VNW die
++ VNW minst
++ WW heeft
++ VZ van
+- N verdrieten
++ LET ,
+
+- N Haer
++ N pijlen
+- N buitens
+- N doels
++ BW niet
++ VZ in
++ LID de
++ N lucht
++ WW verschieten
++ LET .
+
++ BW Nu
+- WW soecktmen
++ WW wijt
++ VG en
+- WW sijdt
++ SPEC sich
+- SPEC selven
+- SPEC diemen
++ N mint
++ LET ,
+
+- SPEC Maer
++ VNW die
++ LID de
+- N deuchde
+- WW zoeckt
++ WW is
++ VNW die
++ SPEC sich
+- N selven
++ WW vindt
++ LET .
+
++ VNW Die
++ SPEC gaet
++ LID een
++ ADJ effen
+- ADJ wech
++ VZ binnen
++ WW gemeten
++ N palen
++ LET ,
+
++ VNW Dien
+- ADJ salmen
++ VZ in
+- N sijn
+- N ganck
++ BW niet
+- N dickwils
++ WW achterhalen
++ LET ,
+
+- SPEC Wt
+- N sijn
++ ADJ verscheiden
++ WW doen
++ LET ,
++ VG doch
+- ADJ gelijckvormich
++ LET ,
+- WW blijckt
+
++ VG Dat
++ VNW hij
+- N seer
+- N selden
++ VZ van
++ LID den
+- N wech
++ LID der
+- N deuchden
+- WW wijckt
++ LET .
+
+- N MERCUR
++ LET .
+
+- N Maer
++ VNW dees
+- N sijn
++ ADJ dun
+- WW gesaeit
++ LET ,
++ VNW men
+- ADJ vinter
+- ADJ naulijx
+- N seven
++ LET ,
+
++ VNW Die
+- SPEC Brutus
++ VG of
+- N sijn
++ N oom
+- WW gelijcken
++ VZ in
+- N haer
++ WW leven
++ LET .
+
+- SPEC JUPPIJN
++ LET .
+
++ SPEC Den
+- SPEC Roomschen
+- ADJ kaij
++ WW int
++ N brein
++ VZ door
+- N minnedranck
+- WW ontstelt
+
+- ADJ Vercoopt
+- ADJ sijns
+- N susters
++ N knechts
+- WW huisraet
+- N cleenoodje
++ LET ,
++ VZ om
+- WW gelt
++ LET ,
+
++ VNW Hij
+- WW hellept
++ LID de
+- N gemeent
++ VZ ten
+- ADJ naesten
++ VZ bij
++ VZ op
++ WW rollen
++ LET ,
+
++ SPEC Soo
+- N suicht
++ VNW hij
++ VNW al
++ LID het
+- N haer
++ VZ met
++ ADJ ongehoorde
++ WW tollen
++ LET ,
+
+- N MERCUR
++ LET .
+
++ VG En
++ BW al
+- WW verquist
++ VNW hijt
++ VG of
++ WW smijt
++ VNW het
++ VZ te
++ N grabbel
++ BW weer
++ LET ,
+
+- SPEC JUPPIJN
++ LET .
+
+- SPEC Noyt
++ SPEC wasser
++ ADJ beter
+- N slaef
++ LET ,
+- SPEC noyt
++ SPEC wasser
++ ADJ slimmer
++ N heer
++ LET .
+
++ SPEC Den
+- SPEC Phereschen
++ N tyran
++ VG en
++ SPEC can
++ SPEC sich
++ BW niet
++ WW bedwingen
++ LET ,
+
+- WW Siet
++ VNW hij
++ LID een
+- N treurspel
+- WW aen
++ VG of
+- N traenen
++ VNW hem
++ WW ontspringen
++ LET .
+
+- N MERCUR
++ LET .
+
+- WW Daer
++ VNW hij
++ VZ door
+- VNW sijn
++ N bevel
++ LET ,
++ VZ met
+- ADJ bittre
+- N wreetheit
+- WW gróót
++ LET ,
+
++ SPEC Laet
++ WW brengen
++ VNW alle
+- N daech
+- SPEC soo
+- SPEC menich
++ SPEC mensch
++ VZ ter
+- WW dóódt
++ LET .
+
+- SPEC JUPPIJN
++ LET .
+
+- N D'Agrigentinen
+- ADJ rijck
++ VNW die
+- N slempen
++ VZ van
+- N haer
++ N haven
++ LET ,
+
++ BW Al
+- N waendens'
++ BW heden
+- WW doot
++ LET ,
++ BW morgen
++ VZ te
+- N sijn
++ WW begraven
++ LET ,
+
+- N MERCUR
++ LET .
+
++ VG En
++ WW bouwen
+- WW huisen
+- N swaer
++ VNW die
++ VNW men
++ VZ van
++ VG als
+- N versiet
++ LET ,
+
++ BW Al
++ WW sleet
++ LID den
++ SPEC mensch
++ VZ van
+- N sieckt
++ VG noch
++ VZ van
++ LID de
++ N jaren
++ BW niet
++ LET .
+
+- SPEC JUPPIJN
++ LET .
+
++ SPEC Den
+- N stouten
+- VZ crijsman
++ VZ van
+- SPEC Antigonus
++ SPEC gaet
++ N wagen
++ LET ,
+
+- N Sijn
++ N lijf
++ LET ,
+- ADJ dewijl
++ VNW hij
+- WW quijnt
++ LET ,
++ VZ in
++ N stormen
++ VG en
++ VZ in
+- N slaegen
++ LET .
+
+- N MERCUR
++ LET .
+
+- N Genesen
+- WW sijnde
++ LET ,
++ SPEC gaet
++ VNW hij
+- WW nae
++ LID den
+- N strijt
+- WW vertsaecht
+
++ VG En
+- N seit
++ SPEC t
+- WW gesonde
++ N lijf
++ VG en
++ WW is
++ BW niet
+- WW goedt
+- WW gewaecht
++ LET .
+
+- SPEC JUPPIJN
++ LET .
+
++ SPEC Pericles
++ SPEC sich
+- SPEC onttreckt
++ LET ,
++ VZ om
+- N cleenachting
++ VZ te
++ WW vlieden
++ LET ,
+
++ N T
+- N geselschap
++ VZ van
++ LID de
+- N beste'
++ LET ,
++ VG en
++ WW wilde
++ VG dat
++ LID de
++ N lieden
+
+- N Werpende
+- N haer
+- WW oogen
++ VZ met
++ N verwondering
++ VZ op
++ VNW hem
++ LET ,
+
++ VG En
++ VZ tot
+- N sijn
++ N lof
++ BW alleen
+- N verheffende'
+- ADJ haere
++ N stem
++ LET ,
+
++ VNW Hem
+- SPEC tijdeloose
++ SPEC mensch
+- SPEC bijnae
++ LID de
+- N eere
+- WW booden
+
++ VNW Die
+- ADJ sij
++ WW gewent
+- N sijn
+- WW aen
++ LID de
+- N doodeloose
+- WW gooden
++ LET ;
+
+- N MERCUR
++ LET .
+
++ VG En
++ VZ in
+- N sijn
+- N grootsheit
++ WW vleit
++ VG als
+- N oolijck
++ LET ,
+- N laech
++ VG en
+- N flaeuw
+
++ VNW Hij
+- N de'
+- SPEC heffe
++ LID des
+- SPEC gemeents
++ LET ,
+- N d'ambachten
++ VG en
++ LID het
+- N graeuw
++ LET .
+
+- N Sulck
+- N eenen
++ LET ,
+- ADJ alsser
++ VNW wat
++ WW int
+- ADJ oorloch
++ WW is
++ VZ te
++ WW winnen
++ LET ,
+
++ WW Schijnt
++ VZ op
+- N sijn
+- WW vijandt
++ ADJ bits
++ LET ,
++ VG en
++ SPEC t
+- SPEC Vaderlant
++ VZ te
++ N minnen
+
++ WW Dien
++ VNW 't
+- ADJ lant
++ LET ,
++ VZ ten
++ N tijden
++ VG als
++ VNW 't
++ VZ op
++ LID een
++ WW betalen
++ SPEC gaet
+
++ VZ Van
++ WW tollen
++ LET ,
+- ADJ naulijx
++ WW int
++ TW negende
+- WW lidt
+- WW bestaet
++ LET .
+
+- SPEC JUPPIJN
++ LET .
+
++ LID Een
++ N ander
++ VZ van
++ LID een
++ N wijf
+- N verdraecht
++ LID het
+- ADJ vuilste
++ WW schelden
+
++ VG En
++ WW dwingt
+- N sijn
++ N gramschap
++ N sonder
++ LID 't
++ VNW minste
++ VZ te
++ WW vergelden
++ LET ,
+
+- N MERCUR
++ LET .
+
+- SPEC Wt
++ N vrees
++ VZ van
+- N quaet
++ N gerucht
++ LET ,
+- N aen
+- WW deuchd
++ VNW hij
++ BW niet
++ VG en
+- WW denckt
++ LET ,
+
++ VG Want
++ VNW hij
++ VZ met
+- N buldren
+- N t'hans
++ N hemel
++ VG en
+- WW aerde
++ WW mengt
+
++ VZ Als
++ VNW hem
+- N sijn
++ N broeder
++ WW schijnt
+- WW yet
++ VZ te
+- WW verongelijcken
++ LET :
+
++ BW Hoe
++ WW wilt
+- WW souwt
++ WW worden
++ WW had
++ VNW dat
+- ADJ vollick
+- N Coninckrijken
++ LET ,
+
++ SPEC Soo
++ VNW dat
+- N haer
++ N macht
+- N nae
++ WW wil
++ VNW wat
+- ADJ conde
++ N rechten
++ VZ an
++ LET ;
+
+- N Gelijck
++ VG als
+- N Heindrick
++ LID den
+- SPEC Engelschen
+- N bulleman
++ LET ,
+
++ VNW Die
+- N Coninginnen
+- WW maeckt
++ LET ,
++ VZ door
+- N minnelijck
+- N versotten
+
+- ADJ Beweecht
++ LET ,
++ VG en
++ WW doet
+- N haer
+- N t'hans
+- WW onthalsen
++ VZ op
++ N schavotten
++ LET .
+
+- SPEC JUPPIJN
++ LET .
+
+- N Sulck
+- N eenen
+- WW spreeckt
++ VZ met
++ N roem
++ VZ van
+- N sijn
++ ADJ gemeen
++ N geslacht
++ LET ,
+
++ VNW Die
++ WW int
+- ADJ besonder
+- WW elck
++ VG of
+- N sot
++ VG of
++ N duivel
++ TW acht
++ LET .
+
++ VNW Die
++ VZ door
++ LID een
+- N ouderdoom
++ WW behoorden
++ VZ te
+- WW bedaeren
++ LET ,
+
++ WW Doen
++ VNW dit
++ LET ,
++ VNW wat
++ ADJ sal
++ BW dan
++ WW doen
++ LET ,
++ VZ in
++ VNW d'
+- WW onbedachte
+- N jaeren
++ LET ,
+
++ LID De
+- N jeuchde
++ VNW die
++ LID den
+- N naem
+- ADJ vant
+- N wispeltuiren
+- WW draecht
++ LET .
+
+- N MERCUR
++ LET .
+
+- N Antinous
++ VNW die
++ WW vrijt
++ LET ;
++ VNW hij
+- WW quijnt
++ LET ,
++ VNW hij
+- WW queelt
++ LET ,
++ VNW hij
+- WW claecht
++ LET ,
+
++ VNW Hij
+- WW smeeckt
++ LET ,
++ VNW hij
+- WW lonckt
++ LET ,
++ VNW hij
++ WW looft
++ VG en
+- WW soeckt
++ VZ met
+- N duisent
+- N kunsjens
+
++ VZ Te
++ WW scheuren
++ VZ van
+- N sijn
++ ADJ lief
+- ADJ eenige
+- N cleene
+- N gunsjens
++ LET ,
+
++ VG En
++ WW weet
++ BW wel
++ LET ,
++ N zoo
+- ADJ sij
++ VNW hem
++ ADJ daer
++ VZ in
++ WW is
++ VZ te
++ N geval
++ LET ,
+
++ VNW Dat
++ VZ van
+- N haer
+- N heusheit
++ VNW hem
++ LID de
+- N walge
++ WW steken
++ ADJ sal
++ LET .
+
+- SPEC JUPPIJN
++ LET .
+
+- N Jonckvrouwen
++ VNW die
++ VNW u
+- WW siet
+- WW geviert
++ VG en
+- N aengebeden
++ LET ,
+
++ SPEC Van
+- N hoopen
+- N vrijers
++ LET ,
++ WW kiest
++ VNW u
+- WW jonsten
++ VZ te
++ WW besteden
++ LET ,
+
++ VZ Met
++ N zegen
++ LET ,
+- WW aen
++ VNW de
++ VNW geen
++ VNW die
+- N jonst
++ LID het
++ N harte
+- WW treckt
++ LET ,
+
++ VG En
+- WW vloeckt
++ VNW die
+- N gecklijck
+- WW zoeckt
++ VNW hetgeen
++ VG dat
++ VNW hij
+- WW begeckt
++ LET .
+
+- N MERCUR
++ LET .
+
+- VNW Ghij
+- N vrijers
++ VNW die
+- N soo
+- WW seer
++ WW sijt
++ VZ met
++ VNW u
++ N hart
++ ADJ verlegen
++ LET ,
+
++ VNW Dat
+- ADJ ghij
++ VNW 't
+- N verschencken
++ WW wilt
++ LET ,
+- N ick
+- N waerschouw
++ VNW u
+- WW daertegen
+
++ BW Te
+- WW sien
++ VNW wie
+- N ghij
++ VNW 't
++ WW vertrouwt
++ LET ,
++ VG en
++ VNW dat
+- ADJ ghij
++ LID het
+- N verhangt
+
+- WW Daer
++ VNW 't
++ VNW geen
+- N onthael
+- N geveinst
++ VG of
++ ADJ bitter
++ VG en
+- WW ontfangt
++ LET ;
+
+- ADJ Maer
++ ADJ daer
++ VNW het
++ WW werd
+- WW gestooft
++ VZ in
+- ADJ sachte
+- N weerliefds
++ N handen
++ LET ,
+
+- SPEC JUPPIJN
++ LET .
+
+- WW Daer
++ VNW 't
++ VZ in
++ ADJ statige
+- SPEC Trouws
+- ADJ onbrekelijcke
++ N banden
+
++ VZ Met
+- N yver
++ ADJ eindeloos
++ WW worde
++ WW gesloten
++ ADJ vast
++ LET ;
+
+- N MERCUR
++ LET .
+
++ VG En
++ BW niet
++ VZ ten
++ TW derden
+- N daech
+- N stincke'
++ VZ als
++ LID een
+- N kermisgast
++ LET .
+
+- SPEC Aglauros
++ WW spijt
++ VNW het
++ LET ,
++ VNW dat
+- ADJ sij
+- ADJ ijemant
++ VZ bet
++ WW hoort
++ WW loven
+
++ VG Als
+- N haer
++ LET ,
++ VG en
+- WW soeckt
++ VZ met
+- N cracht
+- N sulcke
++ VZ te
+- WW gaen
++ VZ te
++ VZ boven
++ LET ,
+
++ VG En
++ VG als
++ WW sijt
++ BW niet
++ SPEC en
++ SPEC can
++ LET ,
+- N soo
+- WW soeckt
++ WW sijt
++ WW inden
++ N schijn
++ LET ,
+
++ WW Wil
+- ADJ arger
++ LET ,
++ SPEC ende
+- SPEC souw
++ BW wel
++ ADJ beter
++ WW willen
+- N sijn
++ LET :
+
+- N Daerover
++ WW is
+- ADJ sij
++ BW nu
+- ADJ manierlijck
++ VG en
+- ADJ aenminnich
+
++ SPEC Van
+- WW wesen
++ VG en
+- WW gelaet
++ LET ,
++ BW nu
++ N weder
+- N góóns
++ VG en
+- ADJ vinnich
++ LET ,
+
++ BW Eens
+- N selfden
+- N vrijers
++ BW nu
++ N vriendin
++ LET ,
++ BW nu
+- N vijandin
++ LET .
+
+- SPEC JUPPIJN
++ LET .
+
+- SPEC Sij
+- WW soeckt
++ LID de
++ N liefde
++ BW niet
++ LET ,
+- N maer
++ N roem
++ VG of
+- ADJ nots
++ N gewin
++ LET .
+
+- N MERCUR
++ LET .
+
++ BW Wel
++ LID een
++ ADJ verliefde
+- N vlaech
++ WW heeft
+- SPEC Merope
++ VZ bij
+- N tijen
++ LET ,
+
+- N Maer
+- N haer
++ WW lust
++ BW niettemin
+- ADJ haer
++ ADJ vrijer
++ VZ te
+- WW sien
++ WW lijen
++ LET ,
+
+- N Gelijck
++ BW al
+- ADJ waer
+- ADJ sij
++ ADJ daer
++ VZ opt
+- WW hoochste
++ VZ mee
++ WW vereert
++ LET ;
+
++ VNW Dat
+- N yemant
+- ADJ vleesch
++ VG en
++ WW bloedt
++ VZ om
+- N haerentwil
++ WW verteert
++ LET .
+
++ VG En
++ WW bidt
++ VNW hij
+- N haer
++ WW int
+- N laest
+- N sijn
++ WW knagend
+- WW leedt
++ VZ te
++ WW stillen
++ LET ,
+
+- N Sij
+- WW seyt
++ LET ,
+- N hebdij
++ VNW mij
++ ADJ lief
+- N soo
++ WW lijdt
++ VZ om
+- N mijnent
++ WW willen
++ LET ,
+
+- N Maer
+- N datse'
++ LET ,
++ VZ om
+- N sijnent
++ WW wil
++ LET ,
++ VNW hem
+- BW lievende'
++ WW helpen
++ WW moest
++ LET ,
+
++ VNW Dat
++ WW is
++ VZ in
+- N haer
++ N gedacht
++ VZ te
+- WW soecken
+- N alsoo
++ ADJ woest
++ LET ,
+
++ VG Als
++ VG noch
++ LID een
+- N weergae
++ VZ tot
+- SPEC Electra'
+- N haer
++ ADJ brave
+- N suster
++ LET ,
+
++ VNW Die
++ N trouw
++ VG en
+- N lieflijck
++ WW is
++ VG en
++ WW int
+- WW gemoedt
++ ADJ geruster
++ LET ,
+
+- N Waer
++ VZ door
++ VNW hen
++ WW valt
++ VZ te
++ N beurt
++ LID een
++ WW wijdt
++ WW verschillend
++ N lot
++ LET :
+
+- ADJ Sij
++ WW huwt
++ VZ met
+- SPEC Sisyphus
++ LET ,
++ SPEC Electra
++ VZ met
++ LID een
+- N godt
++ LET .
+
+- SPEC JUPPIJN
++ LET .
+
+- SPEC Prijams
+- WW vervrouwde
++ N zoon
++ WW schijnt
++ VZ boven
+- N maet
++ VZ in
++ VNW beiden
++ LET ,
+
+- WW Goedt
++ VG en
+- N quaet
++ N vrouws
++ VZ te
+- N sijn
++ LET ;
++ VZ om
++ VZ van
++ LID een
++ N vrouw
++ VZ te
++ WW scheiden
++ LET ,
+
++ WW Vergeet
++ VNW hij
+- SPEC Godt
++ VG en
++ N eer
++ LET ,
++ VG en
++ WW schendt
++ ADJ heilige
++ N trouw
++ LET ,
+
++ VG En
++ VZ om
++ VZ te
++ WW raken
+- WW aen
++ LID een
+- ADJ trouweloose
++ N vrouw
++ LET ,
+
++ LET (
+- SPEC Twelck
+- SPEC Griecken
+- ADJ waerdich
++ TW acht
++ LID de
++ N pijn
++ VZ om
++ VZ te
++ WW beletten
++ LET )
+
+- WW Gaet
++ VNW hij
+- N sijn
+- WW vaderlandt
++ VZ in
+- N roock
++ VG en
+- ADJ vlamme
++ N setten
++ LET .
+
