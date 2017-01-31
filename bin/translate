@@ -1,43 +1,183 @@
 #!/usr/bin/perl -w
 # translate: perform word by word translation on text
-# usage: translate lexicon < text
-# 20150717 erikt(at)xs4all.nl
+# usage: translate [-n|-h] [-i internetFile] [-l lexiconFile] [-r rulesFile] [-m modernFile] < text
+# notes: option -n: output list of unprocessed tokens
+#        option -h: generate html output rather than text output
+#        example lexiconFile line format: word translation
+#        example rulesFile line format: frequency precision phrase => translation
+# 20150717 erikt(at)xs4all.nl 
 
 use strict;
+use Getopt::Std;
 
 my $command = $0;
-my $lexicon = shift(@ARGV);
-if (not defined $lexicon) { die "usage: $command lexicon < text\n"; }
-if (not open(INFILE,$lexicon)) { 
-   die "$command: cannot read lexicon file $lexicon\n";
-}
-# expected line format: score #translations word score1 translation1 ...
-my %lexicon = ();
-my $tokensLeft;
-while (<INFILE>) {
-   my $line = $_;
-   chomp($line);
-   my @tokens = split(/\s+/,$line);
-   my $translation = pop(@tokens);
-   my $word = pop(@tokens);
-   if (not defined $tokensLeft) { $tokensLeft = $#tokens+1; }
-   if (not defined $word) { die "$command: incomplete lexicon line: $line\n"; }
-   if ($tokensLeft != $#tokens+1) { die "$command: unexpected lexicon line: $line\n"; }
-   if (defined $lexicon{$word}) { die "$command: double translation for word $word!\n"; }
-   $lexicon{$word} = $translation;
-}
-close(INFILE);
+my $baseDir = "/var/www/clin2017st";
+my $UNKNOWN = "???";
+my $foundNewTranslation = 0;
+my %options = ();
+getopts("nhi:l:r:m:",\%options);
 
-# process text
+if (not %options) {
+   die "usage: $command [-n|-h] [-l lexiconFile] [-i internetFile] [-r rulesFile] [-m modernWordsFile] < textFile\n"; 
+}
+
+my %lexicon = ();
+if (defined $options{"l"}) { %lexicon = &readLexicon($options{"l"}); }
+my @rules = ();
+if (defined $options{"r"}) { @rules = &readRules($options{"r"}); }
+my %iLexicon = (); # internet lexicon
+if (defined $options{"i"}) { %iLexicon = &readLexicon($options{"i"}); }
+my %mLexicon = (); # modern word lexicon
+if (defined $options{"m"}) { %mLexicon = &readLexicon($options{"m"}); }
+
+# process text from STDIN
 while (<STDIN>) {
    my $line = $_;
    chomp($line);
    my @tokens = split(/\s+/,$line);
+   if (defined $options{"h"}) { print "<p>\n"; }
    foreach my $token (@tokens) {
-      if (defined $lexicon{$token} and $lexicon{$token} ne $token) { print $lexicon{$token}." "; }
-      else { print "$token "; }
+      if (defined $lexicon{$token}) {
+         # use translation lexicon
+         if (not defined $options{"n"}) {
+            if (not defined $options{"h"}) { print $lexicon{$token}." "; }
+            else { print "<font style=\"color:blue;\">$lexicon{$token}</font><sup>$token</sup> "; }
+         }
+      } elsif (defined $mLexicon{$token}) { 
+         # word is modern: do not change it
+         if (not defined $options{"n"}) {
+            if (not defined $options{"h"}) { print $token." "; }
+            else { print "$token "; }
+         }
+      } elsif (defined $iLexicon{$token} and $iLexicon{$token} ne $UNKNOWN) {
+         # use internet lexicon
+         if (not defined $options{"n"}) {
+            if (not defined $options{"h"}) { print $iLexicon{$token}." "; }
+            else { print "<font style=\"color:green;\">$iLexicon{$token}</font><sup>$token</sup> "; }
+         }
+      } else { 
+         # lookup word at INT's lexicon service
+         my $translation = $UNKNOWN;
+         if (defined $options{"i"}) {
+            $translation = defined $iLexicon{$token} ? 
+                          $iLexicon{$token} : &lookupToken($token);
+         }
+         if ($translation ne $UNKNOWN) {
+            if (not defined $options{"n"}) {
+               if (not defined $options{"h"}) { print $iLexicon{$token}." "; }
+               else { print "<font style=\"color:green;\">$iLexicon{$token}</font><sup>$token</sup> "; }
+            }
+         } else {
+            # apply morphological rules
+            $translation = &applyRules($token);
+            if (defined $options{"n"}) {
+               if ($translation eq $token) { print "$translation\n"; }
+            } elsif (defined $options{"h"} and $translation ne $token) {
+               print "<font style=\"color:red;\">$translation</font><sup>$token</sup> ";
+            } else { print "$translation "; }
+         }
+      }
    }
-   print "\n";
+   if (not defined $options{"n"}) { print "\n"; }
+   if (defined $options{"h"}) { print "</p>\n"; }
 }
  
+if (defined $options{"i"} and $foundNewTranslation) { 
+   &storeLexicon($options{"i"},\%iLexicon); 
+}
+
 exit(0);
+
+sub applyRules() {
+   my $token = shift(@_);
+   for (my $i=0;$i<=$#rules;$i++) {
+      my ($before,$after) = split(/\s+/,$rules[$i]);
+      $token =~ s/$before/$after/g;
+   }
+   return($token);
+}
+
+sub readRules() {
+   my $rulesFile = shift(@_);
+   if (not defined $rulesFile) { die "$command: usage: readRules(file)\n"; }
+   my @rules = ();
+   if (not open(INFILE,$rulesFile)) { 
+      die "$command: cannot read lexicon file $rulesFile\n";
+   }
+   # example expected line format: 222 0.996 aen => aan
+   my $lastFreq;
+   my $lastPrec;
+   LOOP: while (<INFILE>) {
+      my $line = $_;
+      chomp($line);
+      if ($line =~ /^\s*#/) { next LOOP; }
+      $line =~ s/^\s+//;
+      my @tokens = split(/\s+/,$line);
+      my $freq = shift(@tokens); 
+      my $prec = shift(@tokens);
+      my $word = shift(@tokens);
+      shift(@tokens);
+      my $translation = shift(@tokens);
+      if (not defined $translation or $translation eq "*") { $translation = ""; }
+      push(@rules,"$word $translation");
+      $lastFreq = $freq;
+      $lastPrec = $prec;
+   }
+   close(INFILE);
+   return(@rules);
+}
+
+sub readLexicon() {
+   my $lexiconFile = shift(@_);
+   my %lexicon = ();
+   if (not open(INFILE,$lexiconFile)) { 
+      die "$command: cannot read lexicon file $lexiconFile\n";
+   }
+   # expected line format: score #translations word score1 translation1 ...
+   my $tokensLeft;
+   # read translation lexicon from file $lexicon
+   while (<INFILE>) {
+      my $line = $_;
+      chomp($line);
+      my @tokens = split(/\s+/,$line);
+      my $translation = pop(@tokens);
+      my $word = pop(@tokens);
+      if (not defined $tokensLeft) { $tokensLeft = $#tokens+1; }
+      if (not defined $word) { die "$command: incomplete lexicon line: $line\n"; }
+      if ($tokensLeft != $#tokens+1) { die "$command: unexpected lexicon line: $line\n"; }
+      if (defined $lexicon{$word}) { die "$command: double translation for word $word!\n"; }
+      $lexicon{$word} = $translation;
+   }
+   close(INFILE);
+   return(%lexicon);
+}
+
+sub lookupToken() {
+   my $token = shift(@_);
+   if ($token =~ /\W/) { return($UNKNOWN); }
+   if (not open(INFILE,"echo $token|$baseDir/bin/lexiconServiceLookup|")) {
+      die "$command: cannot access lexicon lookup service\n";
+   }
+   my $result = <INFILE>;
+   if (not defined $result or $result eq "") { return(); }
+   chomp($result);
+   my @fields = split(/\s+/,$result);
+   my $translation = defined $fields[1] ? $fields[1] : $UNKNOWN;
+   $iLexicon{$token} = $translation;
+   $foundNewTranslation = 1;
+   return($translation);
+}
+
+sub storeLexicon() {
+   my $lexiconFile = shift(@_);
+   my $lexiconRef = shift(@_);
+   my %lexicon = %{$lexiconRef};
+   if (not open(OUTFILE,">$lexiconFile")) { 
+      die "$command: cannot write lexicon file $lexiconFile\n";
+   }
+   foreach my $token (sort keys %lexicon) {
+      print OUTFILE "$token $lexicon{$token}\n";
+   }
+   close(OUTFILE);
+   return();
+}

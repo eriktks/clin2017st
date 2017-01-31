@@ -36,3 +36,6 @@ all: 1637/bible.txt 1888/bible.txt
 2010/bible.txt:
 	cd 2010; make; cd ..
 
+zip:
+	rm -f clin2017st.zip
+	zip -ry clin2017st.zip -xclin2017st/.git/* -xclin2017st/README.md clin2017st
