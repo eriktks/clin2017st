@@ -1,7 +1,7 @@
 CLIN2017 Shared Task: Translating Historical Text
 Also see: http://ifarm.nl/clin2017st/
 20160830 erikt(at)xs4all.nl
-version date: 20161107a
+version date: 20170112a
 
 This directory contains scripts which can be used for starting with
 the CLIN2017 Shared Task: Translating Historical Text.
@@ -80,6 +80,22 @@ version. But you are free to try using the text.
 Note however that the apocrypha are missing in the 2010 bible
 version, so if you want to work with this version you should 
 restrict the 1637 data to the first 31175 lines.
+
+
+NOTES ABOUT THE 1657 BIBLE
+
+A 1657 version of the Statenvertaling has been added to the 
+data at 24 November 2016. You can obtain this version in the
+same way as the 2010 version:
+
+$ cd 1657
+$ make
+
+(the text will be stored in the file 1657/bible.txt).
+
+The 1657 bible is slightly different from the 1637 bible. You 
+can use it as additional training material in combination with
+one of the two later bible versions.
 
 
 REFERENCES

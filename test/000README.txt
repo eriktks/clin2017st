@@ -12,6 +12,10 @@ line). The example files (Blankaart text) also include examples of
 the accepted output formats. Your output files only need to be in 
 one of these formats.
 
+Please submit an abstract of 200-300 words with your result files,
+in which you describe your translation methods and the data 
+resources that you have used.
+
 More information about the shared task can be found on the shared
 task website: http://ifarm.nl/clin2017st/ . Questions abou the shared
 task can be sent to Erik Tjong Kim Sang erikt(at)xs4all.nl
@@ -43,4 +47,3 @@ http://dbnl.nl
      http://dbnl.nl/tekst/huyg007jour03_01/huyg007jour03_01_0002.php
 1698 Den Neder-landschen herbarius ofte kruid-boek der voornaamste kruiden by Steven Blankaart
      http://dbnl.nl/tekst/blan012nede01_01/blan012nede01_01_0002.php
-

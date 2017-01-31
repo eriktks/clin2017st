@@ -1,4 +1,5 @@
 20161031 test file CLIN2017 shared task: 17th century - 21st century Dutch
+version date: 20170112
 
 This directory contain a sample file of a translation of
 17th century Dutch to 21st century Dutch. It consists of
@@ -8,8 +9,12 @@ from 1698, source: http://dbnl.nl/tekst/blan012nede01_01/
 
 There are two versions of the text: the original version
 from 1698 (blankaart.tok) and a translated version 
-(blankaartT.tok). Both versions have already been tokenized.
-The translated version contains two non-text features:
+(blankaartT.tok; blankaartT-2016.tok is an old version 
+of that file). Both versions have already been tokenized.
+The rules used for translating the words can be found in
+the file 000RULES.txt
+
+The translated file contains two non-text features:
 
 word_word: attached words with an underscore (_) indicate
            words from the original text which have been
@@ -19,7 +24,8 @@ word_word: attached words with an underscore (_) indicate
 word+word: attached words with a plus sign (+) indicate
            words from the orginal text which have been
            combined in the translation, e.g. "zo+als" which
-           originally was "soo als".
+           originally was "soo als" (2016 version; omitted
+           in 2017).
 
 The split and combined word markers were introduced in the
 translated text to make it possible to have exactly the same
@@ -41,4 +47,16 @@ The test files submitted in January 2017, will be in the
 same format as blankaart.tok: a tokenized 17th century text.
 The gold standard translated text will be released after
 everyone has submitted their translations.
+
+FILE OVERVIEW
+
+000README: this file
+000RULES.txt: rules used for translating historic to modern Dutch
+blankaart.tok: tokenized 17th-century text
+blankaartT.tok: blankaart.tok translated to 21st-century Dutch
+blankaartT-2016.txt: old version of blankaartT.tok, please ignore
+blankaart.parallel.txt: parallel version of the 17th century and 
+   21st century text, one word per line preceded by +/- to indicate
+   if the tagger knew the orginal word (+) or not (-) and the 
+   assigned base tag (often incorrect)
 
