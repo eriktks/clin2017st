@@ -3,7 +3,7 @@ http://ifarm.nl/clin2017st/
 20170130 erikt(at)xs4all.nl
 
 This directory contains ten 17th-century Dutch texts in two different
-formats. Translate these text to modern Dutch and submit your results
+formats. Translate these texts to modern Dutch and submit your results
 to erikt(at)xs4all.nl by Friday 3 February 23:59:59 CET (21:59:59 GMT).
 
 The texts are available in two different formats: tokenized text 
