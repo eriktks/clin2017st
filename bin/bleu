@@ -1,16 +1,21 @@
 #!/usr/bin/perl -w
 # bleu: compare two texts with bleu score
-# usage: bleu translatedFile referenceFile
-# note: beware of file order in arguments: different order => different results!
-# compared with: multi-bleu.perl
+# usage: bleu [-s] translatedFile referenceFile
+# notes:a
+# * beware of file order in arguments: different order => different results!
+# * option -s: perform cleanup of input lines: _=>" "; +=>""; DELETED=>""
+# * compared with: multi-bleu.perl
 # https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl
 # 20150903 erikt(at)xs4all.nl
-# 20160919 current version
+# 20170213 current version
 
 use strict;
+use Getopt::Std;
 
 my $command = $0;
 my $MAXNGRAM = 4;
+my %options = ();
+getopts("s",\%options);
 
 my $translated = shift(@ARGV);
 my $reference = shift(@ARGV);
@@ -34,12 +39,14 @@ my @pTotals = ();  # number of ngrams in the translated text
 while (<TRANSLATED>) {
    my $tLine = $_; # translated line
    chomp($tLine);
+   if (defined $options{"s"}) { $tLine = &cleanup($tLine); }
    $tLength += split(/\s+/,$tLine);
    my $rLine = <REFERENCE>; # reference line
    if (not defined $rLine) { 
       die "$command: too few lines in reference file!\n";
    }
    chomp($rLine);
+   if (defined $options{"s"}) { $rLine = &cleanup($rLine); }
    $rLength += split(/\s+/,$rLine);
    for (my $n=1;$n<=$MAXNGRAM;$n++) {
       my %tNgrams = &getNgrams($n,$tLine);
@@ -56,7 +63,7 @@ close(TRANSLATED);
 for (my $n=1;$n<=$MAXNGRAM;$n++) { 
    $pScores[$n] /= $pTotals[$n] > 0 ? $pTotals[$n] : 1;
    # bleu score is (exponent of) geometric average of ngram precision scores
-   $bleuScore += log($pScores[$n])/$MAXNGRAM; 
+   if ($pScores[$n] > 0) { $bleuScore += log($pScores[$n])/$MAXNGRAM; }
 }
 $bleuScore = exp($bleuScore);
 # multiply with brevity penalty if the translated text is shorter
@@ -99,4 +106,23 @@ sub compareNgrams() {
       }
    }
    return($score,$tLength);
+}
+
+# cleanup function for CLIN2017 shared task data lines
+sub cleanup() {
+   my $line = shift(@_);
+   $line =~ s/_/ /g; # split words like datse=>dat_ze
+   $line =~ s/\+//g; # combined words like in dien=>in+dien
+   $line =~ s/^\s+//;
+   $line =~ s/\s+$//;
+   my @tokens = split(/\s+/,$line);
+   for (my $i=0;$i<=$#tokens;$i++) {
+      if ($tokens[$i] eq "DELETED") { 
+         # deleted tokens
+         splice(@tokens,$i,1);
+         $i--;
+      }
+   }
+   $line = join(" ",@tokens);
+   return($line);
 }

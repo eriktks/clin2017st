@@ -12,17 +12,20 @@
     Participants built systems which translated seventeenth-century
     texts written in Dutch to modern Dutch. There were ten test
     files of about 1000 words, each taken from a different decade
-    of the seventeenth century.
+    of the seventeenth century. System results were evaluated with
+    BLEU scores (10 files) and part-of-speech accuracy (1 file). 
+    Results were presented at the conference CLIN2017 on 10
+    February 2017 [<a href="/erikt/talks/2017-clin-1.pdf">PDF slides</a>].
    </p>
    <h2>Best run per participating team</h2>
    <table>
     <tr><th></th><th align="left">Team</th><th style="text-align:center;">BLEU</th><th>POS accuracy</th><th>Abstract</th></tr>
-    <tr><td>1.</td><td>Ljubljana</td><td><font style="background:yellow">0.61022</font></td><td style="text-align:center;">0.842&plusmn;0.022</td><td><a href="ljubljana-1/abstract.pdf"><img src="images/Adobe_PDF_file_icon_24x24.png" width="24" height="24" alt="PDF abstract"></img></td>
+    <tr><td>1.</td><td>Ljubljana</td><td><font style="background:yellow">0.61029</font></td><td style="text-align:center;">0.842&plusmn;0.022</td><td><a href="ljubljana-1/abstract.pdf"><img src="images/Adobe_PDF_file_icon_24x24.png" width="24" height="24" alt="PDF abstract"></img></td>
     <tr><td>2.</td><td>Bochum   </td><td>0.60665</td><td style="text-align:center;">0.824&plusmn;0.030</td><td><a href="bochum-1/abstract.pdf"><img src="images/Adobe_PDF_file_icon_24x24.png" width="24" height="24" alt="PDF abstract"></img></td>
     <tr><td>3.</td><td>Helsinki </td><td>0.59896</td><td style="text-align:center;"><font style="background:yellow">0.856&plusmn;0.029</font></td><td><a href="helsinki-1/abstract.pdf"><img src="images/Adobe_PDF_file_icon_24x24.png" width="24" height="24" alt="PDF abstract"></img></td>
     <tr><td>4.</td><td>Amsterdam</td><td>0.56783</td><td style="text-align:center;">0.836&plusmn;0.027</td><td><a href="amsterdam-1/abstract.pdf"><img src="images/Adobe_PDF_file_icon_24x24.png" width="24" height="24" alt="PDF abstract"></img></td>
     <tr><td>5.</td><td>Leuven   </td><td>0.53752</td><td style="text-align:center;">0.825&plusmn;0.025</td><td><a href="leuven-1/abstract.pdf"><img src="images/Adobe_PDF_file_icon_24x24.png" width="24" height="24" alt="PDF abstract"></img></td>
-    <tr><td>6.</td><td>Utrecht  </td><td>0.46866</td><td style="text-align:center;">0.812&plusmn;0.030</td><td><a href="utrecht-1/abstract.pdf"><img src="images/Adobe_PDF_file_icon_24x24.png" width="24" height="24" alt="PDF abstract"></img></td>
+    <tr><td>6.</td><td>Utrecht  </td><td>0.46867</td><td style="text-align:center;">0.812&plusmn;0.030</td><td><a href="utrecht-1/abstract.pdf"><img src="images/Adobe_PDF_file_icon_24x24.png" width="24" height="24" alt="PDF abstract"></img></td>
     <tr><td>7.</td><td>Groningen</td><td>0.45061</td><td style="text-align:center;">0.793&plusmn;0.024</td><td><a href="groningen-1/abstract.pdf"><img src="images/Adobe_PDF_file_icon_24x24.png" width="24" height="24" alt="PDF abstract"></img></td>
     <tr><td>8.</td><td>Valencia </td><td>0.43011</td><td style="text-align:center;">-</td><td><a href="valencia-1/abstract.pdf"><img src="images/Adobe_PDF_file_icon_24x24.png" width="24" height="24" alt="PDF abstract"></img></td>
     <tr style="background:#dddddd"><td style="background:white;">  </td><td>baseline</td><td>0.33097</td><td style="text-align:center;">0.709&plusmn;0.030</td></tr>
@@ -35,7 +38,7 @@
    <h2>All BLEU scores</h2>
    <table style="font-size:small">
     <tr><th align="left">Run</th><th>Average</th><th>1607</th><th>1616</th><th>1626</th><th>1636</th><th>1646</th><th>1656</th><th>1668</th><th>1678</th><th>1686</th><th>1692</th></tr>
-    <tr><td><a href="ljubljana-1/">Ljubljana-1</a></td><td><font style="background:yellow">0.61022</font></td><td><font style="background:yellow">0.67722</font></td><td>0.60926</td><td>0.57455</td><td>0.61950</td><td><font style="background:yellow">0.57985</font></td><td>0.56036</td><td>0.61011</td><td>0.65322</td><td>0.55935</td><td><font style="background:yellow">0.66524</font></td></tr>
+    <tr><td><a href="ljubljana-1/">Ljubljana-1</a></td><td><font style="background:yellow">0.61029</font></td><td><font style="background:yellow">0.67732</font></td><td>0.60926</td><td>0.57455</td><td>0.61950</td><td><font style="background:yellow">0.58307</font></td><td>0.56037</td><td>0.61012</td><td>0.65322</td><td>0.55935</td><td><font style="background:yellow">0.66524</font></td></tr>
     <tr><td><a href="bochum-2/">Bochum-2</a></td><td>0.60665</td><td>0.64089</td><td><font style="background:yellow">0.61309</font></td><td>0.56817</td><td>0.58585</td><td>0.44186</td><td>0.63273</td><td><font style="background:yellow">0.67552</font></td><td><font style="background:yellow">0.70411</font></td><td>0.58466</td><td>0.60917</td></tr>
     <tr><td><a href="bochum-1/">Bochum-1</a></td><td>0.60234</td><td>0.65983</td><td>0.60315</td><td>0.55118</td><td>0.61470</td><td>0.45921</td><td><font style="background:yellow">0.65072</font></td><td>0.65249</td><td>0.65674</td><td>0.56904</td><td>0.60538</td></tr>
     <tr><td><a href="helsinki-5/">Helsinki-5</a> *</td><td>0.59896</td><td>0.61667</td><td>0.57046</td><td><font style="background:yellow">0.58052</font></td><td><font style="background:yellow">0.62991</font></td><td>0.54697</td><td>0.60257</td><td>0.57868</td><td>0.67123</td><td>0.54081</td><td>0.65617</td></tr>
@@ -47,8 +50,8 @@
     <tr><td><a href="leuven-1/">Leuven-1</a></td><td>0.53752</td><td>0.55011</td><td>0.47465</td><td>0.50595</td><td>0.55878</td><td>0.54798</td><td>0.51725</td><td>0.53486</td><td>0.59645</td><td>0.49087</td><td>0.60402</td></tr>
     <tr><td><a href="helsinki-3/">Helsinki-3</a></td><td>0.52014</td><td>0.54159</td><td>0.49049</td><td>0.50284</td><td>0.52435</td><td>0.43068</td><td>0.52654</td><td>0.57713</td><td>0.55754</td><td>0.50634</td><td>0.54218</td></tr>
     <tr><td><a href="helsinki-1/">Helsinki-1</a></td><td>0.49451</td><td>0.49072</td><td>0.43877</td><td>0.48839</td><td>0.55702</td><td>0.44870</td><td>0.53486</td><td>0.48633</td><td>0.56976</td><td>0.38622</td><td>0.54547</td></tr>
-    <tr><td><a href="helsinki-4/">Helsinki-4</a> *</td><td>0.48575</td><td>0.51222</td><td>0.46029</td><td>0.46493</td><td>0.52980</td><td>0.47679</td><td>0.50895</td><td>0.49286</td><td>0.52398</td><td>0.38617</td><td>0.50703</td></tr>
-    <tr><td><a href="utrecht-1/">Utrecht-1</a></td><td>0.46866</td><td>0.48990</td><td>0.41681</td><td>0.45833</td><td>0.49936</td><td>0.44293</td><td>0.45677</td><td>0.43454</td><td>0.51246</td><td>0.42110</td><td>0.55846</td></tr>
+    <tr><td><a href="helsinki-4/">Helsinki-4</a> *</td><td>0.48562</td><td>0.51338</td><td>0.46029</td><td>0.46493</td><td>0.52947</td><td>0.47724</td><td>0.50860</td><td>0.49286</td><td>0.52398</td><td>0.38617</td><td>0.50544</td></tr>
+    <tr><td><a href="utrecht-1/">Utrecht-1</a></td><td>0.46867</td><td>0.49013</td><td>0.41701</td><td>0.45833</td><td>0.49936</td><td>0.44293</td><td>0.45677</td><td>0.43454</td><td>0.51246</td><td>0.42110</td><td>0.55846</td></tr>
     <tr><td><a href="groningen-1/">Groningen-1</a></td><td>0.45061</td><td>0.45711</td><td>0.38521</td><td>0.40959</td><td>0.48100</td><td>0.38544</td><td>0.48637</td><td>0.49893</td><td>0.47769</td><td>0.41755</td><td>0.49965</td></tr>
     <tr><td><a href="valencia-1/">Valencia-1</a> *</td><td>0.43011</td><td>0.45356</td><td>0.33863</td><td>0.41330</td><td>0.44843</td><td>0.33326</td><td>0.46862</td><td>0.53844</td><td>0.45571</td><td>0.42832</td><td>0.41513</td></tr>
     <tr style="background:#dddddd"><td><a href="baseline/">baseline</a></td><td>0.33097</td><td>0.30432</td><td>0.25332</td><td>0.24763</td><td>0.33541</td><td>0.39338</td><td>0.26192</td><td>0.37572</td><td>0.27629</td><td>0.48482</td><td>0.34949</td></tr>
@@ -121,7 +124,7 @@
     <tr><td>Universitat Polit&egrave;cnica de Val&egrave;ncia</td><td>Miguel Domingo, Francisco Casacuberta</td></tr>
    </table>
    <hr/>
-   <address>Last update: 11 February 2017. erik.tjong.kim.sang(at)meertens.knaw.nl</address>
+   <address>Last update: 13 February 2017. erik.tjong.kim.sang(at)meertens.knaw.nl</address>
   </div>
  </body>
 </html>
