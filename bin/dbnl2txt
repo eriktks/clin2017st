@@ -11,7 +11,7 @@ my $end = 1441;
 # for debugging: process only the text with this number (9-1441)
 if (defined $ARGV[0]) { $start = $end = shift(@ARGV); }
 my $lineCounter = 1;
-my $baseUrl = "http://dbnl.nl/tekst/_sta001stat01_01/_sta001stat01_01_";
+my $baseUrl = "https://dbnl.nl/tekst/_sta001stat01_01/_sta001stat01_01_";
 # %skip: sections without bible text
 # but is skipping files really necessary?
 my %skip = qw(  59 1  100 1  128 1  165 1  200 1  225 1  247 1 

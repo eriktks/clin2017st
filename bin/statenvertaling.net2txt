@@ -6,7 +6,7 @@
 use strict;
 
 my $command = $0;
-my $baseUrl = "http://www.statenvertaling.net/bijbel/";
+my $baseUrl = "https://www.statenvertaling.net/bijbel/";
 # short names of books; do not use hash: it is unordered
 my @books = qw(gene exod levi nume deut jozu rich
                ruth 1sam 2sam 1kon 2kon 1kro 2kro
