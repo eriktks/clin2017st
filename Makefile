@@ -21,8 +21,8 @@ all: 1637/bible.txt 1888/bible.txt
 	bin/translate -l lexicon.txt < test.1637.tok > test.1637.translated.tok
 	# compare the translated 1637 test text with the 1888 test text
 	bin/bleu test.1637.translated.tok test.1888.tok
-	# note: the baseline score is 0.50818
-	# your translated text should obtain a higher score
+	# note: the baseline score is 0.13464
+	# the translated text should obtain a higher score
 
 # download the 1637 bible text
 1637/bible.txt:
