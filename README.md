@@ -5,7 +5,7 @@ Also see: http://ifarm.nl/clin2017st/
 
 20160830 erikt(at)xs4all.nl
 
-version date: 20170213a
+version date: 20190722a
 
 This directory contains scripts which can be used for starting with the CLIN2017 Shared Task: Translating Historical Text.
 
